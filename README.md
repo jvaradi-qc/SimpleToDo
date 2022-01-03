@@ -4,7 +4,7 @@
 
 Submitted by: **John Varadi**
 
-Time spent: **3** hours spent in total
+Time spent: **5** hours spent in total
 
 ## User Stories
 
