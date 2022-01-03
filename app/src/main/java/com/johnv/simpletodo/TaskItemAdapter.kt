@@ -7,15 +7,20 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import android.widget.Toast
 
 
 /**
  *  A bridge that tells the recyclerView how to display the data we give it
  */
-class TaskItemAdapter(val listOfItems: List<String>, val longClickListener: OnLongClickListener) : RecyclerView.Adapter<TaskItemAdapter.ViewHolder>() {
+class TaskItemAdapter(val listOfItems: List<String>, val longClickListener: OnLongClickListener, val clickListener: OnClickListener) : RecyclerView.Adapter<TaskItemAdapter.ViewHolder>() {
 
     interface OnLongClickListener {
         fun onItemLongClicked(position: Int)
+    }
+
+    interface OnClickListener {
+        fun onItemClicked(position: Int)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -48,6 +53,9 @@ class TaskItemAdapter(val listOfItems: List<String>, val longClickListener: OnLo
         init {
             textView = itemView.findViewById(android.R.id.text1)
 
+            itemView.setOnClickListener {
+                clickListener.onItemClicked(adapterPosition)
+            }
             itemView.setOnLongClickListener {
                 //Log.i("John", "Long clicked on item: " + adapterPosition)
                 longClickListener.onItemLongClicked(adapterPosition)
